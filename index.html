@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="author" content="Juliana Alves">
+    <title>Sistema CRUD </title>
+</head>
+<body>
+    <script>
+    let arrUser = [];
+        //CRIAR SISTEMA DE GERENCIAMENTO DE USUARIO
+    function showMenu(){
+        parseInt(prompt(`
+            *******MENU*******
+            [1]- CADASTRAR USUÁRIO
+            [2]- LISTAR USUÁRIO
+            [3]- ATUALIZAR USUÁRIO
+            [4]- DELETAR USUÁRIO
+            [5]- SAIR DO PROGRAMA
+            `));
+        };
+    //MÉTODO DE CADASTRO DE USUÁRIO=>(VERBO: HTTP:POST)
+        const addUser = ()=> {
+        const nameUser = prompt("Informe o nome da pessoa: ")
+        const emailUser= prompt("Informe o email da pessoa: ")
+        if(!nameUser || !emailUser){
+            alert("Os campos são obrigatórios!")
+        };
+
+        arrUser.push({nameUser,emailUser})
+
+        console.log(arrUser)
+
+    };
+     addUser()
+     //LISTAGEM DE USUÁRIO =>(VERBO HTTP: GET)
+     const listUser =() => {
+        let listUser= "";
+
+        arrUser.forEach((dataUser) => {
+        
+        listUser += `Nome: ${dataUser.nameUser}, Email: ${dataUser.emailUser}`
+
+        });
+
+        console.log(listUser)
+
+        alert("*****Lista de Usuário*****" + listUser)
+     };
+        listUser()
+    //MÉTODO DE ATUALIZAR => (VERBO HTTP)
+        function UpdateUserInfo(){
+            const findEmail = prompt("Informe o email que você deseja atualizar: ")
+            const usuarioEncontrado= arrUser.find(user.emailUser == findEmail)
+            if(usuarioEncontrado){
+                alert('Usuário Não foi Encontrado')
+            return;
+            }
+            usuarioEncontrado.nameUser= variavelNova
+            usuarioEncontrado.emailUser=variavelNovaEmail
+        }
+        UpdateUserInfo()
+    </script>
+    
+</body>
+</html>
