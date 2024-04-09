@@ -11,19 +11,20 @@
     let arrUser = [];
         //CRIAR SISTEMA DE GERENCIAMENTO DE USUARIO
     function showMenu(){
-        parseInt(prompt(`
+        return  parseInt(prompt(`
             *******MENU*******
             [1]- CADASTRAR USUÁRIO
             [2]- LISTAR USUÁRIO
             [3]- ATUALIZAR USUÁRIO
             [4]- DELETAR USUÁRIO
             [5]- SAIR DO PROGRAMA
-            `));
+            `))
         };
     //MÉTODO DE CADASTRO DE USUÁRIO=>(VERBO: HTTP:POST)
         const addUser = ()=> {
         const nameUser = prompt("Informe o nome da pessoa: ")
         const emailUser= prompt("Informe o email da pessoa: ")
+
         if(!nameUser || !emailUser){
             alert("Os campos são obrigatórios!")
         };
@@ -32,8 +33,8 @@
 
         console.log(arrUser)
 
-    };
-     addUser()
+    }
+
      //LISTAGEM DE USUÁRIO =>(VERBO HTTP: GET)
      const listUser =() => {
         let listUser= "";
@@ -49,18 +50,81 @@
         alert("*****Lista de Usuário*****" + listUser)
      };
         listUser()
-    //MÉTODO DE ATUALIZAR => (VERBO HTTP)
-        function UpdateUserInfo(){
-            const findEmail = prompt("Informe o email que você deseja atualizar: ")
-            const usuarioEncontrado= arrUser.find(user.emailUser == findEmail)
-            if(usuarioEncontrado){
-                alert('Usuário Não foi Encontrado')
-            return;
-            }
-            usuarioEncontrado.nameUser= variavelNova
-            usuarioEncontrado.emailUser=variavelNovaEmail
+       //Método de Atualizar => (Verbo HTTP: PUT)
+       function UpdateUserInfo() {
+        const findEmail = prompt("Informe o email que você deseja atualizar!");
+        const usuarioEncontrado = arrUser.find(
+          (user) => user.emailUser === findEmail
+        );
+
+        if (!usuarioEncontrado) {
+          alert("Usuário não foi encontrado!");
+
+          return;
         }
-        UpdateUserInfo()
+
+        const novoEmail = prompt("Informe o novo email: ");
+        const novoNomeUsuario = prompt("Informe o nome do usuário: ");
+
+        //  condicao      retorno se verdadeiro
+        novoEmail ? (usuarioEncontrado.emailUser = novoEmail) : null;
+
+        if (novoNomeUsuario) {
+          usuarioEncontrado.nameUser = novoNomeUsuario;
+        }
+
+        alert("Usuário foi atualizado com sucesso!");
+      }
+    //Método para Deletar => Verbo HTTP (DELETE)
+     function DeletarUser(){
+        const emailDelete = prompt("Informe o email que deseja deletar: ")
+        const indiceDelete= arrUser.findIndex(email => email.emailUser === emailDelete)
+
+        const confirmacao = window.confirm(`Você deseja mesmo excluir o usuário?${emailDelete}`)
+        if (confirmacao) {
+            arrUser.splice(indiceDelete, 1)
+        }
+        alert("Usuário deletado com sucesso!")
+     }
+
+     
+    
+
+
+
+
+
+     let opcaoUser = true
+     while (opcaoUser){
+        
+     switch (showMenu()) {
+        case 1:
+            addUser();
+            break;
+        case 2:
+            listUser();
+            break;
+        case 3:
+            UpdateUserInfo();
+            break;
+        case 4: 
+            DeletarUser() 
+            break;
+        case 5:
+            alert('Saindo do programa, até mais!')
+            break;
+     
+        default:
+            opcaoUser= false
+            alert('Opção inválida! Tente novamente')
+            break;
+     }
+    
+     }
+      
+
+
+
     </script>
     
 </body>
